@@ -21,7 +21,9 @@ Write-Host "Creating Function App Plan"
 az functionapp plan create --resource-group $ResourceGroupName --name $FunctionAppPlanName --location eastus --number-of-workers 1 --sku EP1 --is-linux
 
 Write-Host "Creating Function App"
-az functionapp create --name $FunctionAppName --storage-account $StorageAccountName --resource-group $ResourceGroupName --plan $FunctionAppPlanName --deployment-container-image-name $FunctionContainerImageName --functions-version 2
+az functionapp create --name $FunctionAppName --storage-account $StorageAccountName --resource-group $ResourceGroupName --plan $FunctionAppPlanName --functions-version 2
+
+#--deployment-container-image-name $FunctionContainerImageName 
 
 Write-Host "Getting storage connection string"
 $StorageString = az storage account show-connection-string --resource-group $ResourceGroupName --name $StorageAccountName --query connectionString --output tsv
