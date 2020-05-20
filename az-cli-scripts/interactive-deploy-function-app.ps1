@@ -17,11 +17,15 @@ $script = "$PSScriptRoot\create-resource-group.ps1"
 $script = "$PSScriptRoot\create-storage.ps1"
 &  $script -ResourceGroupname $ResourceGroupName -Region $Region -StorageAccountName $StorageAccountName
 
-Write-Host "Creating Function App Plan"
-az functionapp plan create --resource-group $ResourceGroupName --name $FunctionAppPlanName --location eastus --number-of-workers 1 --sku EP1 --is-linux
+#Write-Host "Creating Function App Plan"
+#az functionapp plan create --resource-group $ResourceGroupName --name $FunctionAppPlanName --location eastus --sku Y1
 
 Write-Host "Creating Function App"
-az functionapp create --name $FunctionAppName --storage-account $StorageAccountName --resource-group $ResourceGroupName --plan $FunctionAppPlanName --functions-version 2
+# Function with specified plan
+#az functionapp create --name $FunctionAppName --storage-account $StorageAccountName --resource-group $ResourceGroupName --plan $FunctionAppPlanName --functions-version 2
+
+# Function with Consumption Plan
+az functionapp create --name $FunctionAppName --storage-account $StorageAccountName --resource-group $ResourceGroupName --consumption-plan-location $Region --functions-version 2
 
 #--deployment-container-image-name $FunctionContainerImageName 
 
